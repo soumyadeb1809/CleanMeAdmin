@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.soumyadeb.cleanmeadmin.RequestDetailActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/img"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:text="Dustbin ID :"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:id="@+id/dustbin_id"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dustbin_id"
+        android:text="Last Cleaned :"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:id="@+id/last_cleaned"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_cleaned"
+        android:text="Status :"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/status"
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:text="Take action"
+        android:id="@+id/btn_take_action"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        />
+
+</RelativeLayout>

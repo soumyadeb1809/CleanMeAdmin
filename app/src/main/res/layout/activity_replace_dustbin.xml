@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.soumyadeb.cleanmeadmin.ReplaceDustbinActivity">
+
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt"
+        android:text="Enter replacement dustbin details"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_back"
+        android:textColor="@android:color/white"
+        android:text="Scan QR Code"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="148dp"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <LinearLayout
+        android:id="@+id/txt_or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_scan"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1.5dp"
+            android:layout_gravity="center"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="OR" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1.5dp"
+            android:layout_gravity="center"
+            android:background="@android:color/darker_gray" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtEnterMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_or"
+        android:layout_centerHorizontal="true"
+        android:text="Enter manually" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_or"
+        android:id="@+id/til_dustbin_id"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dustbin ID" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:text="Replace dustbins"
+        android:id="@+id/btn_submit"
+        android:background="@drawable/large_button_back"
+        android:textColor="@android:color/white"
+        />
+
+
+</RelativeLayout>

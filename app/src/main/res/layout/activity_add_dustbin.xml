@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.soumyadeb.cleanmeadmin.AddDustbinActivity">
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/scan_qr"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/button_back"
+            android:text="Scan QR Code"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/txt_or"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scan_qr"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1.5dp"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="OR" />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1.5dp"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtEnterMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_or"
+            android:layout_centerHorizontal="true"
+            android:text="Enter manually" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_dustbin_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtEnterMan"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dustbin ID" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_select_location"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_dustbin_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/button_back"
+            android:text="Select Location"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txt_location_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_select_location"
+            android:layout_margin="16dp"
+            android:maxLines="4"
+            android:text="Location Details..." />
+
+
+        <Button
+            android:id="@+id/btn_add_dustbin"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/large_button_back"
+            android:text="Add Dustbin to location"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/toolbar_blank" android:id="@+id/toolbar"/>
+
+</LinearLayout>
