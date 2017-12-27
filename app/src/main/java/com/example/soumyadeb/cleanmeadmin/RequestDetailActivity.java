@@ -75,7 +75,7 @@ public class RequestDetailActivity extends AppCompatActivity {
 
         if(dustbinId != null){
             mProgress.show();
-            mDatabase = mRootRef.child("dustbins").child("BMC");
+            mDatabase = mRootRef.child("dustbins").child("GVMC");
 
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -181,7 +181,7 @@ public class RequestDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 alert.hide();
                 mProgress.show();
-                DatabaseReference mDustbinRef = mRootRef.child("dustbins").child("BMC");
+                DatabaseReference mDustbinRef = mRootRef.child("dustbins").child("GVMC");
                 mDustbinRef.child(dustbinId).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
