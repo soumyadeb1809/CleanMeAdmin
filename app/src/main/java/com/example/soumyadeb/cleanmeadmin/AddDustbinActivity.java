@@ -53,7 +53,7 @@ public class AddDustbinActivity extends AppCompatActivity {
     private final int PLACE_PICKER_REQUEST = 1;
     private Place place = null;
     private String city = null;
-    private String locality = null;
+    private String locality = "NA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
