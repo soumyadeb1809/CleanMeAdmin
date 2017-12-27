@@ -198,7 +198,7 @@ public class RequestDetailActivity extends AppCompatActivity {
                     }
                 });
 
-                DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("BMC");
+                DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("GVMC");
                 mFullListRef.child(dustbinId).setValue(null);
 
 
@@ -217,8 +217,8 @@ public class RequestDetailActivity extends AppCompatActivity {
                 Map requestMap = new HashMap();
 
                 Calendar calendar = Calendar.getInstance();
-                requestMap.put("dustbins/BMC/" +dustbinId+"/status","clean");
-                requestMap.put("dustbins/BMC/" +dustbinId+"/last_clean",String.valueOf(calendar.getTimeInMillis()));
+                requestMap.put("dustbins/GVMC/" +dustbinId+"/status","clean");
+                requestMap.put("dustbins/GVMC/" +dustbinId+"/last_clean",String.valueOf(calendar.getTimeInMillis()));
 
                 Log.d("asdf","Dustbin Id: "+dustbinId);
 
@@ -237,7 +237,7 @@ public class RequestDetailActivity extends AppCompatActivity {
                     }
                 });
 
-                DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("BMC");
+                DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("GVMC");
                 mFullListRef.child(dustbinId).setValue(null);
 
             }

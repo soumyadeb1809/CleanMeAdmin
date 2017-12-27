@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bhubaneswar Municipality Cooperation"
+        android:text="Greater Vishakhapatnam Municipality Cooperation"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="59dp" />

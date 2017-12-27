@@ -54,7 +54,7 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
 
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mDatabase = mRootRef.child("dustbins").child("BMC");
+        mDatabase = mRootRef.child("dustbins").child("GVMC");
 
 
 
@@ -99,7 +99,7 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     mDatabase.child(oldDustbinId).setValue(null);
-                                    DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("BMC");
+                                    DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("GVMC");
                                     mFullListRef.child(oldDustbinId).setValue(null);
                                     Toast.makeText(getApplicationContext(), "Dustbin replaced successfully.", Toast.LENGTH_LONG).show();
                                     finish();

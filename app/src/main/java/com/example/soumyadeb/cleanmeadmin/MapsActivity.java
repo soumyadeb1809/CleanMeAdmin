@@ -41,6 +41,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Toolbar toolbar;
 
+    private final double VISHAKHAPATNAM_LAT = 17.6868;
+    private final double VISHAKHAPATNAM_LONG = 83.2185;
+
 
 
     @Override
@@ -59,7 +62,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         dustbinList = new ArrayList<>();
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mDatabase = mRootRef.child("dustbins").child("BMC");
+        mDatabase = mRootRef.child("dustbins").child("GVMC");
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -67,7 +70,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String latitude = dataSnapshot.child("latitude").getValue().toString();
                 String longitude = dataSnapshot.child("longitude").getValue().toString();
                 String city = dataSnapshot.child("city").getValue().toString();
-                String locality = dataSnapshot.child("locality").getValue().toString();
+                String locality;
+                if (dataSnapshot.child("locality") != null)
+                    locality = dataSnapshot.child("locality").getValue().toString();
+                else
+                    locality = "NA";
                 String last_clean = dataSnapshot.child("last_clean").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String municipality = dataSnapshot.child("municipality").getValue().toString();
@@ -128,7 +135,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         mMap.setPadding(0,150,0,0);
 
-        LatLng latLng = new LatLng(20.2961, 85.8245);
+        LatLng latLng = new LatLng(VISHAKHAPATNAM_LAT, VISHAKHAPATNAM_LONG);
         mMap.addMarker(new MarkerOptions().position(latLng).title("Current location"));
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11);
         mMap.animateCamera(cameraUpdate);

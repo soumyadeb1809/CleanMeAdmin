@@ -166,7 +166,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 alert.hide();
                 mProgress.show();
-                DatabaseReference mDustbinRef = mRootRef.child("dustbins").child("BMC");
+                DatabaseReference mDustbinRef = mRootRef.child("dustbins").child("GVMC");
                 mDustbinRef.child(dustbinId).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -199,8 +199,8 @@ public class HomeActivity extends AppCompatActivity {
                 Map requestMap = new HashMap();
 
                 Calendar calendar = Calendar.getInstance();
-                requestMap.put("dustbins/BMC/" +dustbinId+"/status","clean");
-                requestMap.put("dustbins/BMC/" +dustbinId+"/last_clean",String.valueOf(calendar.getTimeInMillis()));
+                requestMap.put("dustbins/GVMC/" +dustbinId+"/status","clean");
+                requestMap.put("dustbins/GVMC/" +dustbinId+"/last_clean",String.valueOf(calendar.getTimeInMillis()));
 
                 Log.d("asdf","Dustbin Id: "+dustbinId);
 

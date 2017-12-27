@@ -51,7 +51,7 @@ public class RequestsFragment extends Fragment {
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
 
-        mDatabaseRef = mRootRef.child("full_dustbins/BMC");
+        mDatabaseRef = mRootRef.child("full_dustbins/GVMC");
 
 
         return v;

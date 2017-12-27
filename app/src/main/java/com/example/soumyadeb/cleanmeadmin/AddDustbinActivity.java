@@ -73,7 +73,7 @@ public class AddDustbinActivity extends AppCompatActivity {
         tvLocationDetails = (TextView)findViewById(R.id.txt_location_details);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mDatabase = mRootRef.child("dustbins").child("BMC");
+        mDatabase = mRootRef.child("dustbins").child("GVMC");
 
 
 
@@ -137,9 +137,13 @@ public class AddDustbinActivity extends AppCompatActivity {
                     Map<String, String> data = new HashMap<String, String>();
                     data.put("latitude", String.valueOf(latLng.latitude));
                     data.put("longitude", String.valueOf(latLng.longitude));
+                    if(city == null)
+                        city = "NA";
+                    if (locality == null)
+                        locality = "NA";
                     data.put("city", city);
                     data.put("locality", locality);
-                    data.put("municipality", "BMC");
+                    data.put("municipality", "GVMC");
                     data.put("status", "clean");
                     Calendar calendar = Calendar.getInstance();
                     data.put("last_clean", String.valueOf(calendar.getTimeInMillis()));
