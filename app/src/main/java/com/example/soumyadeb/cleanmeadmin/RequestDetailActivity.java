@@ -187,6 +187,7 @@ public class RequestDetailActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(RequestDetailActivity.this, "Dustbin removed.", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -227,6 +228,7 @@ public class RequestDetailActivity extends AppCompatActivity {
                     public void onSuccess(Object o) {
                         Toast.makeText(RequestDetailActivity.this, "Dustbin marked clean.", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

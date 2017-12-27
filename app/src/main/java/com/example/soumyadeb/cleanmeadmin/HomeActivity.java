@@ -112,8 +112,9 @@ public class HomeActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() != null) {
-                Toast.makeText(this, "Scan result: " + result.getContents(), Toast.LENGTH_LONG).show();
-                dustbinId = result.getContents();
+                Toast.makeText(this, "Scan result: " + Tools.idModifier(result.getContents()), Toast.LENGTH_LONG).show();
+                dustbinId = Tools.idModifier(result.getContents());
+
                 showOptions(dustbinId);
             } else {
                 Toast.makeText(this, "Scan cancelled.", Toast.LENGTH_LONG).show();

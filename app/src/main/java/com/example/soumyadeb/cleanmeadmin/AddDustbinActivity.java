@@ -1,5 +1,6 @@
 package com.example.soumyadeb.cleanmeadmin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -43,6 +44,7 @@ public class AddDustbinActivity extends AppCompatActivity {
     private Button btnScanQR, btnSelectLocation, btnAddDustbin;
     private TextInputLayout tilDustbinId;
     private TextView tvLocationDetails;
+    private ProgressDialog mProgress;
 
     // Declare Firebase instances:
     private DatabaseReference mRootRef, mDatabase;
@@ -65,12 +67,13 @@ public class AddDustbinActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        // Initialize instances:
+        // Initialize UI instances:
         btnScanQR = (Button) findViewById(R.id.scan_qr);
         btnSelectLocation = (Button) findViewById(R.id.btn_select_location);
         btnAddDustbin = (Button) findViewById(R.id.btn_add_dustbin);
         tilDustbinId = (TextInputLayout)findViewById(R.id.til_dustbin_id);
         tvLocationDetails = (TextView)findViewById(R.id.txt_location_details);
+        mProgress = new ProgressDialog(this);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mDatabase = mRootRef.child("dustbins").child("GVMC");
@@ -112,15 +115,22 @@ public class AddDustbinActivity extends AppCompatActivity {
         });
 
 
+        mProgress.setMessage("Uploading data...");
+
+
         btnAddDustbin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 if(TextUtils.isEmpty(tilDustbinId.getEditText().getText().toString()) || place == null){
 
                     Toast.makeText(AddDustbinActivity.this, "Please select all the details.", Toast.LENGTH_LONG).show();
                 }
                 else {
+
+                    mProgress.show();
 
                     // Get location details from latitude and longitude:
                     List<Address> addresses = new ArrayList<>();
@@ -154,12 +164,14 @@ public class AddDustbinActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(AddDustbinActivity.this, "Dustbin added successfully.", Toast.LENGTH_LONG).show();
+                            mProgress.dismiss();
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(AddDustbinActivity.this, "Error occurred, please try again.", Toast.LENGTH_LONG).show();
+                            mProgress.dismiss();
                         }
                     });
                 }
@@ -190,7 +202,7 @@ public class AddDustbinActivity extends AppCompatActivity {
             if (result != null) {
                 if (result.getContents() != null) {
                     Toast.makeText(this, "Scan result: " + result.getContents(), Toast.LENGTH_LONG).show();
-                    tilDustbinId.getEditText().setText(result.getContents());
+                    tilDustbinId.getEditText().setText(Tools.idModifier(result.getContents()));
                 } else {
                     Toast.makeText(this, "Scan cancelled.", Toast.LENGTH_LONG).show();
                 }

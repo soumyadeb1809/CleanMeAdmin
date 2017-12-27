@@ -24,4 +24,10 @@ public class Tools {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+    public static String idModifier(String input){
+                input = input.replaceAll("/", "-");
+
+        return input;
+    }
+
 }
