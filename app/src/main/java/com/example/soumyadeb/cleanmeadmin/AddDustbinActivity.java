@@ -52,7 +52,7 @@ public class AddDustbinActivity extends AppCompatActivity {
     private LatLng latLng;
     private final int PLACE_PICKER_REQUEST = 1;
     private Place place = null;
-    private String city = null;
+    private String city = "NA";
     private String locality = "NA";
 
     @Override
