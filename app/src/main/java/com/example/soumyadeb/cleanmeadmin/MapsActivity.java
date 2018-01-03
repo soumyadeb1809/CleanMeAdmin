@@ -136,8 +136,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setPadding(0,150,0,0);
 
         LatLng latLng = new LatLng(VISHAKHAPATNAM_LAT, VISHAKHAPATNAM_LONG);
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Current location"));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 11);
+        //mMap.addMarker(new MarkerOptions().position(latLng).title("Current location"));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
         mMap.animateCamera(cameraUpdate);
 
         // Add a marker in Sydney and move the camera

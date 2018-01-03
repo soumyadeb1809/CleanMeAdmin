@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.soumyadeb.cleanmeadmin.LoginActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLEANme"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:id="@+id/one"
+        android:layout_marginTop="86dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <View
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/one"
+        android:id="@+id/two"
+        android:background="@android:color/white"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/two"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="ADMINISTRATOR"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please login to continue"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="65dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView3" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/til_user_id"
+        android:theme="@style/InputLayout"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
+            android:hint="User ID" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/til_user_password"
+        android:theme="@style/InputLayout"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/til_user_id"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColor="@android:color/white"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til_user_password"
+        android:layout_marginTop="48dp"
+        android:text="Login"
+        android:id="@+id/btn_login"
+        android:backgroundTint="@android:color/white"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+</RelativeLayout>

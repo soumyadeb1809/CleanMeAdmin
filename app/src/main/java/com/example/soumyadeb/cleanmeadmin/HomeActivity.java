@@ -2,6 +2,10 @@ package com.example.soumyadeb.cleanmeadmin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -21,8 +25,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -40,7 +47,9 @@ public class HomeActivity extends AppCompatActivity {
     
     // Firebase instances:
     private DatabaseReference mRootRef;
-    
+    private FirebaseAuth mAuth;
+
+
     String dustbinId=null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -70,6 +79,8 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
 
         mProgress = new ProgressDialog(this);
@@ -223,5 +234,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser == null){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 }

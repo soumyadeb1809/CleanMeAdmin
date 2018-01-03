@@ -39,9 +39,10 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.0'
+    testCompile 'junit:junit:4.12'
 }
+
 
 
 
