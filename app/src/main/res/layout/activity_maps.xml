@@ -14,4 +14,16 @@
 
     <include layout="@layout/toolbar_blank" android:id="@+id/toolbar"/>
 
+    <Spinner
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/spinner"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/back_spinner"
+        android:padding="10dp"
+        />
+
 </RelativeLayout>

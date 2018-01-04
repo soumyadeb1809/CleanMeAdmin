@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.example.soumyadeb.cleanmeadmin.AddDustbinActivity">
 
-    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+    <include layout="@layout/toolbar_cent" android:id="@+id/toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,6 +58,8 @@
             android:layout_centerHorizontal="true"
             android:text="Enter manually" />
 
+
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_dustbin_id"
             android:layout_width="match_parent"
@@ -79,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/til_dustbin_id"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="108dp"
             android:background="@drawable/button_back"
             android:text="Select Location"
             android:textColor="@android:color/white" />
@@ -103,8 +105,25 @@
             android:text="Add Dustbin to location"
             android:textColor="@android:color/white" />
 
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_dustbin_id"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:text="Select zone" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
+            android:layout_below="@id/textView4"
+            android:layout_marginTop="16dp"/>
+
     </RelativeLayout>
 
-    <include layout="@layout/toolbar_blank" android:id="@+id/toolbar"/>
 
 </LinearLayout>

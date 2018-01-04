@@ -2,6 +2,7 @@ package com.example.soumyadeb.cleanmeadmin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +18,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        sp = getSharedPreferences("cleanme", MODE_PRIVATE);
 
         btnLogin = (Button) findViewById(R.id.btn_login);
         tilUserId = (TextInputLayout) findViewById(R.id.til_user_id);
@@ -75,17 +83,40 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     String deviceToken = FirebaseInstanceId.getInstance().getToken();
-                    String currentUser = mAuth.getCurrentUser().getUid().toString();
+                    final String currentUser = mAuth.getCurrentUser().getUid().toString();
 
                     mDatabase.child("municipalities").child("GVMC").child("zones").child(currentUser)
                             .child("token").setValue(deviceToken)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class)
-                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
-                                    finish();
+                                    mDatabase.child("municipalities").child("GVMC").child("zones").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            String name = dataSnapshot.child("name").getValue().toString();
+                                            String id = dataSnapshot.child("id").getValue().toString();
+                                            String type = dataSnapshot.child("type").getValue().toString();
+                                            SharedPreferences.Editor editor = sp.edit();
+                                            editor.putString("type", type);
+                                            editor.putString("id", id);
+                                            editor.putString("name", name);
+                                            editor.putString("userId", currentUser);
+                                            editor.commit();
+
+                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class)
+                                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+                                            finish();
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -93,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this,"Something went wrong, please try again.", Toast.LENGTH_LONG).show();
                         }
                     });
+
 
 
                 }

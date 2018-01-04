@@ -42,6 +42,7 @@ public class RequestDetailActivity extends AppCompatActivity {
 
     // Data members:
     private String dustbinId = null, image = null, timestamp = null, lastCleaned = null, status = null;
+    private int position;
 
     // Firebase instances:
     private DatabaseReference mRootRef, mDatabase;
@@ -70,7 +71,7 @@ public class RequestDetailActivity extends AppCompatActivity {
             dustbinId = intent.getStringExtra("dustbin_id");
             image = intent.getStringExtra("image");
             timestamp = intent.getStringExtra("timestamp");
-
+            position = Integer.parseInt(intent.getStringExtra("position"));
         }
 
         if(dustbinId != null){
@@ -85,6 +86,8 @@ public class RequestDetailActivity extends AppCompatActivity {
 
                     lastCleaned = dustbinData.child("last_clean").getValue().toString();
                     status = dustbinData.child("status").getValue().toString();
+                    Log.i("asdf", "MILIS: "+lastCleaned);
+
 
                     SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-YYYY, hh:mm:ss");
 
@@ -201,7 +204,8 @@ public class RequestDetailActivity extends AppCompatActivity {
 
                 DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("GVMC");
                 mFullListRef.child(dustbinId).setValue(null);
-
+                RequestsFragment.requestArray.remove(position);
+                RequestsFragment.adapter.notifyDataSetChanged();
 
             }
         });
@@ -241,7 +245,8 @@ public class RequestDetailActivity extends AppCompatActivity {
 
                 DatabaseReference mFullListRef = mRootRef.child("full_dustbins").child("GVMC");
                 mFullListRef.child(dustbinId).setValue(null);
-
+                RequestsFragment.requestArray.remove(position);
+                RequestsFragment.adapter.notifyDataSetChanged();
             }
         });
 

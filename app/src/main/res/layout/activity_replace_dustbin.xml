@@ -7,7 +7,7 @@
     tools:context="com.example.soumyadeb.cleanmeadmin.ReplaceDustbinActivity">
 
 
-    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+    <include layout="@layout/toolbar_cent" android:id="@+id/toolbar"/>
 
     <TextView
         android:layout_width="wrap_content"

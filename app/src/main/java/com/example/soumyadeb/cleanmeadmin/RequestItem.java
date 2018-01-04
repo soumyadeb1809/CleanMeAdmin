@@ -5,15 +5,33 @@ package com.example.soumyadeb.cleanmeadmin;
  */
 
 public class RequestItem {
-    private String dustbin_id, timestamp, image;
+    private String dustbin_id, timestamp, image, zone, zone_name;
 
     public RequestItem() {
     }
 
-    public RequestItem(String dustbin_id, String timestamp, String image) {
+    public RequestItem(String dustbin_id, String timestamp, String image, String zone, String zone_name) {
         this.dustbin_id = dustbin_id;
         this.timestamp = timestamp;
         this.image = image;
+        this.zone = zone;
+        this.zone_name = zone_name;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getZone_name() {
+        return zone_name;
+    }
+
+    public void setZone_name(String zone_name) {
+        this.zone_name = zone_name;
+    }
+
+    public String getZone() {
+        return zone;
     }
 
     public String getDustbin_id() {

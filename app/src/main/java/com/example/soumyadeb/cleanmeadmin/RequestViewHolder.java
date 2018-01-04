@@ -26,6 +26,11 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
         textId.setText("Dustbin ID: "+dustbin_id);
     }
 
+    public void setDustbin_zone(String zone_name){
+        TextView textZone = (TextView) mView.findViewById(R.id.dustbin_zone);
+        textZone.setText("Zone: "+zone_name);
+    }
+
     public void setImage(final String image){
         final ImageView img = (ImageView) mView.findViewById(R.id.img);
 

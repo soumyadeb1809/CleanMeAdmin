@@ -30,4 +30,16 @@ public class Tools {
         return input;
     }
 
+    public static int getZonePos(String id){
+        int pos = -1;
+        for(int i=0; i<HomeActivity.zoneList.size(); i++){
+            if(HomeActivity.zoneList.get(i).getId().equals(id)){
+                pos = i;
+                break;
+            }
+        }
+
+        return pos;
+    }
+
 }

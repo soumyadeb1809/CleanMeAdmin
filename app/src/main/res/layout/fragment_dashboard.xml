@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="20sp"
+        android:textSize="28sp"
         android:layout_centerHorizontal="true"
         android:text="Dashboard"
         android:textColor="@android:color/black"
@@ -20,10 +20,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="Greater Vishakhapatnam Municipality Cooperation"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
+        android:id="@+id/textView2"
+        android:textColor="@android:color/black"
         android:layout_marginTop="59dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text=""
+        android:id="@+id/tv_zone_name"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
 
 

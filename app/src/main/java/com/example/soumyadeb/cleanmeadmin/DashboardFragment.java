@@ -1,13 +1,16 @@
 package com.example.soumyadeb.cleanmeadmin;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -16,6 +19,9 @@ import android.widget.Button;
 public class DashboardFragment extends Fragment {
 
     private Button btnAddDustbin, btnViewAll;
+    private TextView tvZoneName;
+
+    private SharedPreferences sp;
 
     View mView;
     public DashboardFragment() {
@@ -31,6 +37,10 @@ public class DashboardFragment extends Fragment {
 
         btnAddDustbin = (Button) mView.findViewById(R.id.add_dustbin);
         btnViewAll = (Button) mView.findViewById(R.id.view_all);
+        tvZoneName = (TextView) mView.findViewById(R.id.tv_zone_name);
+
+        sp = getContext().getSharedPreferences("cleanme", Context.MODE_PRIVATE);
+        tvZoneName.setText(sp.getString("name","NA"));
 
 
 

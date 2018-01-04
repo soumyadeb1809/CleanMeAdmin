@@ -4,13 +4,28 @@
     android:background="@color/colorPrimary"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clean Me"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="16dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="44dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/open_dustbin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLEANme"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
 </android.support.v7.widget.Toolbar>

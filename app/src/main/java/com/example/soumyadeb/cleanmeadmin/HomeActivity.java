@@ -1,7 +1,9 @@
 package com.example.soumyadeb.cleanmeadmin;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,12 +31,17 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +60,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     String dustbinId=null;
+    public static ArrayList<Zones> zoneList = new ArrayList<>();
+    public static ArrayList<String> zoneNames = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -102,6 +113,9 @@ public class HomeActivity extends AppCompatActivity {
                 startScan();
             }
         });
+
+
+
     }
 
     private void startScan() {
@@ -234,6 +248,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
@@ -245,5 +261,99 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+        else {
+            fetchZones();
+        }
+
+
+    }
+
+
+    private void fetchZones(){
+        mProgress.setMessage("Syncing data. Please wait...");
+        mProgress.show();
+        DatabaseReference zonesRef = mRootRef.child("municipalities").child("GVMC").child("zones");
+
+        zonesRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i("asdf", dataSnapshot.toString());
+
+                String id, name, userId, type;
+
+                type = dataSnapshot.child("type").getValue().toString();
+                if(!type.equals("admin")){
+                    userId = dataSnapshot.getKey().toString();
+                    id = dataSnapshot.child("id").getValue().toString();
+                    name = dataSnapshot.child("name").getValue().toString();
+                    Zones zone = new Zones(name, id, userId, type);
+                    zoneList.add(zone);
+                    zoneNames.add(name);
+
+                    Log.i("asdf", zone.getUserId());
+                }
+                if(mProgress.isShowing())
+                    mProgress.dismiss();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                //Do nothing
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                //Do nothing
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                //Do nothing
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //Do nothing
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.action_logout){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you want to log out from CLEANme Administrator?");
+            builder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mAuth.signOut();
+                    SharedPreferences sp = getSharedPreferences("cleanme", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("type", "");
+                    editor.putString("id", "");
+                    editor.putString("name", "");
+                    editor.putString("userId", "");
+                    editor.commit();
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("CANCEL", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        return true;
     }
 }

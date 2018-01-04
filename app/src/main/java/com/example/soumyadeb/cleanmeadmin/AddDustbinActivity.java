@@ -2,6 +2,7 @@ package com.example.soumyadeb.cleanmeadmin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.SystemClock;
@@ -12,7 +13,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class AddDustbinActivity extends AppCompatActivity {
     private TextInputLayout tilDustbinId;
     private TextView tvLocationDetails;
     private ProgressDialog mProgress;
+    private Spinner zonesSpinner;
 
     // Declare Firebase instances:
     private DatabaseReference mRootRef, mDatabase;
@@ -56,6 +60,9 @@ public class AddDustbinActivity extends AppCompatActivity {
     private Place place = null;
     private String city = "NA";
     private String locality = "NA";
+    ArrayAdapter zonesSpinnerAdapter;
+    SharedPreferences sp;
+    private String type = "NA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,8 @@ public class AddDustbinActivity extends AppCompatActivity {
         toolbar.setTitle("Add Dustbin");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        sp = getSharedPreferences("cleanme", MODE_PRIVATE);
+        type = sp.getString("type", "NA");
 
 
         // Initialize UI instances:
@@ -74,6 +83,8 @@ public class AddDustbinActivity extends AppCompatActivity {
         tilDustbinId = (TextInputLayout)findViewById(R.id.til_dustbin_id);
         tvLocationDetails = (TextView)findViewById(R.id.txt_location_details);
         mProgress = new ProgressDialog(this);
+
+        zonesSpinner = (Spinner) findViewById(R.id.spinner);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mDatabase = mRootRef.child("dustbins").child("GVMC");
@@ -158,6 +169,8 @@ public class AddDustbinActivity extends AppCompatActivity {
                     Calendar calendar = Calendar.getInstance();
                     data.put("last_clean", String.valueOf(calendar.getTimeInMillis()));
 
+                    int pos = zonesSpinner.getSelectedItemPosition();
+                    data.put("zone", HomeActivity.zoneList.get(pos).getUserId());
 
                     // Upload data to the database:
                     mDatabase.child(tilDustbinId.getEditText().getText().toString()).setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -177,6 +190,19 @@ public class AddDustbinActivity extends AppCompatActivity {
                 }
             }
         });
+
+        zonesSpinnerAdapter = new ArrayAdapter(AddDustbinActivity.this, android.R.layout.simple_spinner_item, HomeActivity.zoneNames);
+        zonesSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        zonesSpinner.setAdapter(zonesSpinnerAdapter);
+
+        if(!type.equals("admin")){
+            int pos = Tools.getZonePos(sp.getString("id", "NA"));
+            if(pos != -1)
+                zonesSpinner.setSelection(pos);
+            zonesSpinner.setEnabled(false);
+        }
+
+
     }
 
 
