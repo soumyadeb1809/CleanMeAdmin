@@ -59,6 +59,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         tvStatus = (TextView) findViewById(R.id.status);
         imImage = (ImageView) findViewById(R.id.img);
         mProgress = new ProgressDialog(this);
+        mProgress.setCancelable(false);
         btnTakeAction = (Button)findViewById(R.id.btn_take_action);
 
 

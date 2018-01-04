@@ -1,5 +1,6 @@
 package com.example.soumyadeb.cleanmeadmin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -28,6 +29,7 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
 
     private TextInputLayout tilDustbinId;
     private Button btnScanQR, btnSubmit;
+    private ProgressDialog mProgress;
 
     private String oldDustbinId, newDustbinId;
 
@@ -42,6 +44,9 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mProgress = new ProgressDialog(this);
+        mProgress.setCancelable(false);
+        mProgress.setMessage("Please wait...");
 
         Intent intent = getIntent();
         if(intent!= null)
@@ -66,7 +71,11 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(tilDustbinId.getEditText().getText().toString() != null){
+
+                    mProgress.show();
+
                     newDustbinId = tilDustbinId.getEditText().getText().toString();
 
                     mDatabase.child(oldDustbinId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,11 +112,13 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
                                     mFullListRef.child(oldDustbinId).setValue(null);
                                     Toast.makeText(getApplicationContext(), "Dustbin replaced successfully.", Toast.LENGTH_LONG).show();
                                     finish();
+                                    mProgress.dismiss();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(getApplicationContext(), "Something went wrong, please try again.", Toast.LENGTH_LONG).show();
+                                    mProgress.dismiss();
                                 }
                             });
 
@@ -118,7 +129,7 @@ public class ReplaceDustbinActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                                    mProgress.dismiss();
                         }
                     });
 

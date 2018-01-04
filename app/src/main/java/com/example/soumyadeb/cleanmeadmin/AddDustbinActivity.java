@@ -83,6 +83,7 @@ public class AddDustbinActivity extends AppCompatActivity {
         tilDustbinId = (TextInputLayout)findViewById(R.id.til_dustbin_id);
         tvLocationDetails = (TextView)findViewById(R.id.txt_location_details);
         mProgress = new ProgressDialog(this);
+        mProgress.setCancelable(false);
 
         zonesSpinner = (Spinner) findViewById(R.id.spinner);
 

@@ -82,10 +82,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-
-        ArrayList<String> zoneNames = HomeActivity.zoneNames;
-        zoneNames.add(0, "All zones");
-        zonesSpinnerAdapter = new ArrayAdapter(MapsActivity.this, android.R.layout.simple_spinner_item, zoneNames);
+        ArrayList<String> zones = new ArrayList<>();
+        zones = HomeActivity.zoneNames;
+        zones.add(0, "All zones");
+        zonesSpinnerAdapter = new ArrayAdapter(MapsActivity.this, android.R.layout.simple_spinner_item, zones);
         zonesSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         zonesSpinner.setAdapter(zonesSpinnerAdapter);
 

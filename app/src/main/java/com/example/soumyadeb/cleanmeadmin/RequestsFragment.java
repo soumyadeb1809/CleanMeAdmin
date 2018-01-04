@@ -59,6 +59,7 @@ public class RequestsFragment extends Fragment {
 
 
         mProgress = new ProgressDialog(getContext());
+        mProgress.setCancelable(false);
         mProgress.setMessage("Loading data...");
         mProgress.show();
 

@@ -60,8 +60,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     String dustbinId=null;
-    public static ArrayList<Zones> zoneList = new ArrayList<>();
-    public static ArrayList<String> zoneNames = new ArrayList<>();
+    public static ArrayList<Zones> zoneList;
+    public static ArrayList<String> zoneNames;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,10 +91,14 @@ public class HomeActivity extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        zoneList = new ArrayList<>();
+        zoneNames = new ArrayList<>();
+
         mAuth = FirebaseAuth.getInstance();
 
 
         mProgress = new ProgressDialog(this);
+        mProgress.setCancelable(false);
         
         mRootRef = FirebaseDatabase.getInstance().getReference();
 

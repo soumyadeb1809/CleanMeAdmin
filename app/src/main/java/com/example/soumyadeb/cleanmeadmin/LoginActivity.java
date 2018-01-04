@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         tilPassword = (TextInputLayout) findViewById(R.id.til_user_password);
 
         mProgress = new ProgressDialog(this);
+        mProgress.setCancelable(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
